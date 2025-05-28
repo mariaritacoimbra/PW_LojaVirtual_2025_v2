@@ -9,7 +9,7 @@ def criar_tabela() -> bool:
         cursor.execute(CRIAR_TABELA)
         return cursor.rowcount > 0
 
-def inserir(produto: Produto):
+def inserir(produto: Produto) -> Optional[int]:
     with get_connection() as conn:
         cursor = conn.cursor()
         cursor.execute(INSERIR, (
@@ -19,7 +19,6 @@ def inserir(produto: Produto):
             produto.quantidade))
         return cursor.lastrowid
     
-
 def obter_todos() -> list[Produto]:
     with get_connection() as conn:
         cursor = conn.cursor()
