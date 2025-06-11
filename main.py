@@ -26,7 +26,7 @@ async def get_root():
     return response
 
 
-@app.get("/produtos")
+@app.get("/admin/produtos")
 async def get_produtos():
     produtos = produto_repo.obter_todos()
     response = templates.TemplateResponse("produtos.html", {"request": {}, "produtos": produtos})
@@ -53,17 +53,17 @@ async def post_produto_cadastrar(
  produto = Produto(0, nome, descricao, preco, quantidade)
  id_produto = produto_repo.inserir(produto)
  if id_produto == None:
-     raise Exception("Erro ao inserir produto")
+     raise Exception("Erro ao inserir produto.")
  else:
      return RedirectResponse("/produtos", status_code=303)
 
-@app.get("/clientes")
+@app.get("/admin/clientes")
 async def get_clientes():
     clientes = cliente_repo.obter_todos()
     response = templates.TemplateResponse("clientes.html", {"request": {}, "clientes": clientes})
     return response
 
-@app.get("/formas_pagamento")
+@app.get("/admin/formas_pagamento")
 async def get_formas_pagamento():
     formas_pagamento = forma_pagamento_repo.obter_todas()
     response = templates.TemplateResponse("formas_pagamento.html", {"request": {}, "formas_pagamento": formas_pagamento})
